@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator!</title>
+    <script src="https://www.desmos.com/api/v0.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <style>
+      #calculator { width:500px; height: 400px; }
+    </style>
+  </head>
+  <body>
+    <div id="calculator"></div>
+  </body>
+  <!-- Tail-loading Scripts -->
+  <script>
+      // Get the arguments from the url string
+      var url_arguments = window.location.search.substring(1);
+      //console.log(url_arguments);
+      // Get the element on the page that we are going to insert the calculator into
+      var calculator_div = document.getElementById('calculator');
+      // Parse the calculator type, and based on this, load the appropriate type.
+      // From https://css-tricks.com/snippets/javascript/get-url-variables/
+      function getQueryVariable(variable, query)
+      {
+        // var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if(pair[0] == variable) {
+            return pair[1];
+          }
+        }
+        return(false);
+      }
+
+      // Main parsing of arguments
+      calculator_type = getQueryVariable("type", url_arguments);
+      // Load applicable calculator based off of query type.
+      if ( calculator_type == "Basic" ) {
+        var calculator = Desmos.FourFunctionCalculator(calculator_div);
+      } else if ( calculator_type == "Scientific" ) {
+        var calculator = Desmos.ScientificCalculator(calculator_div);
+      }
+      //console.log(Desmos.enabledFeatures);
+    </script>
+</html>

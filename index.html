@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get me a Calculator!</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div>
+      <input type="radio" id="calc_type_basic" name="calc_type" value="Basic" checked><label for="calc_type_basic">Basic</label>
+      <input type="radio" id="calc_type_scientific" name="calc_type" value="Scientific"><label for="calc_type_scientific">Scientific</label>
+    </div>
+    <button id="calc_button">Load the Calculator!</button>
+  </body>
+  <script>
+    // We start off with the Calculator type set to Basic by default.
+    var calculator_type = "Basic";
+
+    // When we click the button, load the new window with the URL and calculator type as noted.
+    $('#calc_button').on('click', function() {
+      window.open("./calculator.html?type=" + calculator_type, "", "height=500,width=525,scrollbars=0,toolbar=0,titlebar=0,menubar=0,location=0");
+    });
+
+    // When the input changes, update the calculator_type to the appropriate value.
+    $("input[name='calc_type']").change(function() {
+      calculator_type = $(this).val();
+      //console.log(calculator_type);
+    });
+  </script>
+</html>
